@@ -1,9 +1,11 @@
 'use client'
 
-import { CardContainer, CardImage, CarrosselContainer, CarrosselContent, HeaderContainer, HighlightedCardsContainer, HighlightedContainer, IconsContainer, ProductsContainer, StaticCloudButtonGlobal, CardContent, ProductName, ProductPrice, ViewDetailsButton, ProductDescription, CartIconContainer } from "./styles"
-import Image from "next/image"
+import { CardContainer, CardImage, CarrosselContainer, CarrosselContent, HeaderContainer, HighlightedCardsContainer, HighlightedContainer, IconsContainer, ProductsContainer, StaticCloudButtonGlobal, CardContent, ProductName, ProductPrice, ViewDetailsButton, ProductDescription, CartIconContainer, FooterContainer, FooterTitleContainer, FooterContentContainer, FooterRightsReservedContainer, ContactFooterContainer, LogoText } from "./styles"
 import { GlobalStyle } from "@/src/styles/global"
 import { ShoppingCart } from "lucide-react";
+import Image from "next/image"
+import logo from "../../assets/nobgsblogo.png"
+
 
 export default function Home() {
   // Dados de exemplo para os produtos
@@ -39,6 +41,7 @@ export default function Home() {
       <GlobalStyle />
       <div>
         <HeaderContainer>
+          {/* <Image src={logo}  alt="logo"/> */}
           <a href="">Home</a>
           <a href="/pages/products">Produtos</a>
           <a href="">Contato</a>
@@ -106,9 +109,54 @@ export default function Home() {
         <h2>Blog Clientes</h2>
       </div>
       <div>
-        <footer>
-          <p>footer</p>
-        </footer>
+        <FooterContainer>
+          <FooterTitleContainer>
+            <LogoText>
+                <span className="green">S</span>
+                <span className="pink">w</span>
+                <span className="orange">e</span>
+                <span className="yellow">e</span>
+                <span className="blue">t</span>
+                &nbsp;
+                <span className="blue2">B</span>
+                <span className="pink">a</span>
+                <span className="mint">b</span>
+                <span className="cyan">y</span>
+            </LogoText>
+          </FooterTitleContainer>
+
+          <FooterContentContainer>
+            
+            <ContactFooterContainer>
+              
+              <h3>Como nos encontrar?</h3>
+              <p>Avenina Antônio Pedro da Silva Nº 780 </p>
+              <p>Centro - Ouricuri PE</p>
+              <p>WhatsApp: 87 9999-9999 </p>
+
+            </ContactFooterContainer>
+
+
+            <div>
+              <h3>Funcionamento</h3>
+              <p>Aberto segunda a sexta das 08:00 as 18:00</p>
+              <p> Sábado das 08:00 as 13:00</p>
+
+            </div>
+            <div>
+              <h3>Links </h3>
+              <p>Instagram</p>
+              <p>Facebook</p>
+              
+
+            </div>
+
+          </FooterContentContainer>
+                <hr  />
+          <FooterRightsReservedContainer>
+                 © 2025 Sweet Baby - Todos os direitos reservados
+          </FooterRightsReservedContainer>
+        </FooterContainer>
       </div>
     </>
   )
