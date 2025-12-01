@@ -21,8 +21,15 @@ align-items: center;
 justify-content: center;
 gap: 2rem;
 width:100%;
-height: 3rem;
-background: transparent;
+height: 5rem;
+position: -webkit-sticky;
+position: sticky;
+top: 0;
+/* background: transparent; */
+
+background: ${({ theme }) =>
+      `linear-gradient(to top, ${theme.colors.sky}, ${theme.colors.secondary})`};
+
 
 a {
   text-decoration: none;
@@ -36,33 +43,98 @@ a {
 
 }
 `
+// export const CarrosselContainer = styled.div`
+// display: flex;
+// align-items: center;
+// justify-content: center;
+
+// margin-top: 2rem;
+
+
+// `
+
 export const CarrosselContainer = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-
-margin-top: 2rem;
-
-
-`
-
-export const CarrosselContent = styled.div`
-
-position: relative;
-width: 100%;
-height: 500px;
-img {
-  object-fit: cover;
-
-
-  @media (max-width: 768px) {
-    height: 300px; /* Ajusta a altura do carrossel para tablets */
-    display: none;
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: ${({ theme }) => theme.colors.white};
+    transition: transform 0.2s ease;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 
-}
-
+  .swiper-pagination-bullet-active {
+    background: ${({ theme }) => theme.colors.white};
+  }
 `
+
+export const HeroContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  height: 500px;
+  color: ${({ theme }) => theme.colors.white};
+
+  /* Efeito de sobreposição para escurecer a imagem e dar legibilidade ao texto */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3); /* Sombra escura */
+    z-index: 1; /* Fica entre a imagem e o texto */
+  }
+
+  img {
+    object-fit: cover;
+    z-index: 0; /* Imagem fica no fundo */
+  }
+
+  @media (max-width: 768px) {
+    height: 400px; /* Altura ajustada para mobile */
+  }
+`
+
+export const HeroTextContainer = styled.div`
+  position: relative;
+  z-index: 2; /* Garante que o texto fique sobre a camada escura */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
+`;
+
+export const HeroTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
+`;
+
+export const HeroButton = styled.a`
+  padding: 1rem 2.5rem;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.white};
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: ${({ theme }) => theme.colors.secondary};
+  }
+`;
 
 export const ProductsContainer = styled.div`
 
@@ -310,7 +382,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 
-h2 {
+/* h2 {
 
    font-size: 3rem;
   font-weight: bold;
@@ -325,7 +397,7 @@ h2 {
   .blue2 { color: #79C2EC; }
   .mint { color: #8FD389; }
   .cyan { color: #7ECACA; }
-}
+} */
 
 
 `

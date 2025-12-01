@@ -1,13 +1,33 @@
 'use client'
-
-import { CardContainer, CardImage, CarrosselContainer, CarrosselContent, HeaderContainer, HighlightedCardsContainer, HighlightedContainer, IconsContainer, ProductsContainer, StaticCloudButtonGlobal, CardContent, ProductName, ProductPrice, ViewDetailsButton, ProductDescription, CartIconContainer, FooterContainer, FooterTitleContainer, FooterContentContainer, FooterRightsReservedContainer, ContactFooterContainer, LogoText } from "./styles"
+import { useState, useEffect } from "react";
+import { CardContainer, CardImage, CarrosselContainer, HeaderContainer, HighlightedCardsContainer, HighlightedContainer, IconsContainer, ProductsContainer, StaticCloudButtonGlobal, CardContent, ProductName, ProductPrice, ViewDetailsButton, ProductDescription, CartIconContainer, FooterContainer, FooterTitleContainer, FooterContentContainer, FooterRightsReservedContainer, ContactFooterContainer, LogoText, HeroContent, HeroTextContainer, HeroTitle, HeroButton } from "./styles"
 import { GlobalStyle } from "@/src/styles/global"
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image"
-import logo from "../../assets/nobgsblogo.png"
+
+// 1. Importações do Swiper
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 
 export default function Home() {
+  // Estado para armazenar os slides que virão da sua API/CMS
+  const [slides, setSlides] = useState([]);
+
+  // useEffect para buscar os dados quando o componente montar
+  useEffect(() => {
+    // Aqui você faria a chamada para sua API que retorna os dados dos slides
+    // fetch('/api/slides').then(res => res.json()).then(data => setSlides(data));
+    // Por enquanto, vamos simular com dados locais:
+    const fetchedSlides = [
+      { id: 1, image: 'https://res.cloudinary.com/ddqljjsbt/image/upload/v1761400863/hands-resized_lfckdy.jpg', alt: 'Promoção de Inverno', title: 'Coleção de Inverno Chegou!', buttonText: 'Conferir Agora', buttonLink: '/pages/products' },
+      { id: 2, image: 'https://res.cloudinary.com/ddqljjsbt/image/upload/v1761580477/modeltree_czn6qz.png', alt: 'Descontos em Moletons', title: 'Moletons com 20% OFF', buttonText: 'Aproveitar Desconto', buttonLink: '/pages/products/moletoms' },
+    ];
+    setSlides(fetchedSlides);
+  }, []);
   // Dados de exemplo para os produtos
   const products = [
     { 
@@ -39,24 +59,45 @@ export default function Home() {
   return(
     <>
       <GlobalStyle />
-      <div>
-        <HeaderContainer>
-          {/* <Image src={logo}  alt="logo"/> */}
-          <a href="">Home</a>
-          <a href="/pages/products">Produtos</a>
-          <a href="">Contato</a>
-          <a href="">Quem somos</a>
-        </HeaderContainer>
-      </div>
-        <CarrosselContainer>       
-          <CarrosselContent>
-            <Image 
-              src={"https://res.cloudinary.com/ddqljjsbt/image/upload/v1761400863/hands-resized_lfckdy.jpg"} 
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw" // Opcional, mas recomendado para otimização
-              alt="Mãos segurando um pote de creme"
-            />
-          </CarrosselContent>
+      <HeaderContainer>
+        {/* <Image src={logo}  alt="logo"/> */}
+        <a href="">Home</a>
+        <a href="/pages/products">Produtos</a>
+        <a href="">Contato</a>
+        <a href="">Quem somos</a>
+      </HeaderContainer>
+        <CarrosselContainer>
+            {/* 2. Configuração do Componente Swiper */}
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={0}
+              slidesPerView={1}
+              navigation
+              loop={true}
+              pagination={{ clickable: true }}
+              autoplay={{
+                delay: 4000,
+                disableOnInteraction: false,
+              }}
+            >
+              {/* Renderiza os slides dinamicamente a partir dos dados */}
+              {slides.map((slide) => (
+                <SwiperSlide key={slide.id}>
+                  <HeroContent>
+                    <Image 
+                      src={slide.image}
+                      fill
+                      alt={slide.alt}
+                      priority={slide.id === 1} // Apenas o primeiro slide é prioritário
+                    />
+                    <HeroTextContainer>
+                      <HeroTitle>{slide.title}</HeroTitle>
+                      <HeroButton href={slide.buttonLink}>{slide.buttonText}</HeroButton>
+                    </HeroTextContainer>
+                  </HeroContent>
+                </SwiperSlide>
+              ))}
+            </Swiper>
         </CarrosselContainer>
 
       <ProductsContainer>
