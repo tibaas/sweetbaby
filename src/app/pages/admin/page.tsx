@@ -63,6 +63,8 @@ const mockProducts = [
 // Estilo Global para o corpo da página, útil para controlar o scroll quando o menu está aberto
 const GlobalStyle = createGlobalStyle<{ lockScroll?: boolean }>`
   body {
+    margin: 0; /* Remove a margem padrão do navegador */
+    padding: 0; /* Garante que não haja preenchimento extra */
     overflow: ${({ lockScroll }) => (lockScroll ? 'hidden' : 'auto')};
   }
 `;

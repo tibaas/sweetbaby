@@ -11,7 +11,6 @@ export const Sidebar = styled.aside< { $isOpen: boolean }>`
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%;
   width: 250px;
   background-color: ${({ theme }) => theme.colors.white};
   border-right: 1px solid ${({ theme }) => theme.colors.sky};
@@ -76,7 +75,6 @@ export const NavLink = styled.a`
 export const MainContent = styled.main`
   flex: 1;
   padding: 1.5rem;
-  overflow-y: auto;
 
   @media (min-width: 768px) {
     padding: 2rem 3rem;
@@ -164,7 +162,8 @@ export const Card = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: ${({ theme }) => theme.shadows.md};
+  /* Removida a sombra 'inset' que causava a linha pontilhada */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border: 1px solid ${({ theme }) => theme.colors.sky};
 
   h3 {
@@ -184,7 +183,8 @@ export const Section = styled.section`
   background-color: ${({ theme }) => theme.colors.white};
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: ${({ theme }) => theme.shadows.lg};
+  /* Removida a sombra 'inset' que causava a linha pontilhada */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   border: 1px solid ${({ theme }) => theme.colors.sky};
 `;
 
