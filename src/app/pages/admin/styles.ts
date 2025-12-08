@@ -327,3 +327,127 @@ export const Overlay = styled.div`
     display: none;
   }
 `;
+
+export const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  padding: 1rem;
+`;
+
+export const ModalContent = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+`;
+
+export const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.text};
+  }
+`;
+
+export const CloseButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.secondary};
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: ${({ theme }) => theme.colors.secondary};
+  }
+
+  input {
+    padding: 0.75rem;
+    border: 1px solid ${({ theme }) => theme.colors.sky};
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
+
+    &:focus {
+      outline: none;
+      border-color: ${({ theme }) => theme.colors.primary};
+      box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.sky};
+    }
+  }
+`;
+
+export const SubmitButton = styled(AddButton)`
+  margin-top: 1rem;
+  width: 100%;
+  
+  /* Reset para o botão de submit no modal não virar uma bola em telas pequenas */
+  @media (max-width: 576px) {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+  }
+`;
+
+export const ModalBody = styled.div`
+  margin-bottom: 2rem;
+  color: ${({ theme }) => theme.colors.secondary};
+  line-height: 1.6;
+
+  p {
+    margin: 0;
+  }
+
+  strong {
+    color: ${({ theme }) => theme.colors.text};
+  }
+`;
+
+export const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+`;
+
+export const CancelButton = styled(AddButton)`
+  background-color: ${({ theme }) => theme.colors.secondary};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.secondary};
+  }
+`;
+
+export const ConfirmButton = styled(AddButton)`
+  background-color: #e53e3e; /* Cor de perigo */
+`;
