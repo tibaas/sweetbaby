@@ -343,15 +343,23 @@ export const ModalOverlay = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
-  padding: 2rem;
+  background: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  width: 100%;
-  max-width: 500px;
+  width: 90%;
+  max-width: 900px; /* Largura maior em telas grandes */
   max-height: 90vh;
   overflow-y: auto;
-  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+
+  /* Adiciona padding ao conteúdo, mas fora do header */
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    width: 95vw;
+    padding: 1.5rem;
+  }
 `;
 
 export const ModalHeader = styled.div`
@@ -391,19 +399,25 @@ export const FormGroup = styled.div`
     color: ${({ theme }) => theme.colors.secondary};
   }
 
-  input {
+  input, select, textarea {
     padding: 0.75rem;
     border: 1px solid ${({ theme }) => theme.colors.sky};
     border-radius: 6px;
     font-size: 1rem;
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
+    font-family: 'Poppins', sans-serif;
 
     &:focus {
       outline: none;
       border-color: ${({ theme }) => theme.colors.primary};
       box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.sky};
     }
+  }
+
+  textarea {
+    min-height: 80px;
+    resize: vertical;
   }
 `;
 
@@ -450,4 +464,27 @@ export const CancelButton = styled(AddButton)`
 
 export const ConfirmButton = styled(AddButton)`
   background-color: #e53e3e; /* Cor de perigo */
+`;
+
+export const Toast = styled.div<{ $type: 'success' | 'error' }>`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: #fff;
+  background-color: ${({ $type, theme }) => $type === 'success' ? theme.colors.primary : '#e53e3e'};
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
+  animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-in 3.7s forwards;
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-20px); }
+  }
 `;
